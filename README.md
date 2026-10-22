@@ -1,10 +1,13 @@
-# Deadlock Live
+# Deadlock CitadelCast
 
-An independent home for **Dolly Live**, building toward repeatable cinematic
-cameras and a GOTV-like production workflow for Deadlock broadcasts.
+Camera controls and broadcast tools for live Deadlock matches.
 
-This is an experimental source project. A working GOTV service, hosted-match
-deployment and automatic world-space camera rails have not been delivered.
+CitadelCast grew out of Dolly Live. It has its own repository, with shared camera
+code and separate research branches for organizer-hosted and Valve-hosted matches.
+
+It is still experimental. The offline desk works, and earlier observer-input
+tests produced smooth pushes and sweeps. A working GOTV service and automatic
+camera paths are still in development.
 
 ## Current capabilities
 

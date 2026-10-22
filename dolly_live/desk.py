@@ -48,7 +48,7 @@ class Desk:
         location = "none" if pose is None else (
             f"({pose.x:.2f}, {pose.y:.2f}, {pose.z:.2f})  "
             f"pitch/yaw/roll=({pose.pitch:.2f}, {pose.yaw:.2f}, {pose.roll:.2f})")
-        return (f"Deadlock Dolly Live {__version__} | SYNTHETIC / OFFLINE ONLY\n"
+        return (f"Deadlock CitadelCast {__version__} | SYNTHETIC / OFFLINE ONLY\n"
                 f"State: {r.state.upper()} | Sim time: {self.time:.3f}s | "
                 f"Mock connected: {self.camera.connected} | Camera owned: {self.camera.active}\n"
                 f"Map: {self.camera.map_revision}\nShot: {name} | Target: {target}\n"
@@ -153,7 +153,7 @@ class Desk:
 
 
 def main(argv=None, stdin=None, stdout=None):
-    parser = argparse.ArgumentParser(description="Deadlock Dolly Live — synthetic offline terminal desk")
+    parser = argparse.ArgumentParser(description="Deadlock CitadelCast — synthetic offline terminal desk")
     parser.add_argument("--demo", action="store_true", help="print a deterministic simulation and exit")
     parser.add_argument("--script", type=Path, help="read desk commands from a UTF-8 file; no shell execution")
     options = parser.parse_args(argv)

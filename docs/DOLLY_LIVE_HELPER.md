@@ -1,4 +1,4 @@
-# Dolly Live helper: Phase 0
+# CitadelCast helper: Phase 0
 
 Phase 0 is a source-only offline motion compiler, mock player, rate model and
 host-clock probe. **These entry points do not verify live compatibility or

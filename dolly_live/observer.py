@@ -1,4 +1,4 @@
-"""Live observer camera contract for Deadlock Dolly Live.
+"""Historical observer camera contract for Deadlock CitadelCast.
 
 Everything in this module was read out of one reviewed ``client.dll`` by offline
 static analysis. No game was launched, no process was attached, and nothing here

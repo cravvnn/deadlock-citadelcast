@@ -1,9 +1,9 @@
-# Deadlock Dolly Live — offline camera desk
+# Deadlock CitadelCast — offline camera desk
 
 This prototype is a **terminal operator interface** with an in-memory camera and
 two synthetic characters. It never connects to Deadlock, Steam, netcon, a native
 bridge or a running game process. It opens no windows and requires no GPU.
-This desk is now maintained in the independent `deadlock-live` repository.
+This desk is now maintained in the independent `deadlock-citadelcast` repository.
 See the root README for the separate input prototype and current project status.
 
 The separate [Phase 0 helper](DOLLY_LIVE_HELPER.md) now compiles offline console
