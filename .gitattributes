@@ -1,0 +1,7 @@
+* text=auto eol=lf
+# Preserve the exact upstream bytes identified by UPSTREAM.json.
+dolly_live/_vendor/dolly/path.py -text
+dolly_live/_vendor/dolly/particles.py -text
+dolly_live/_vendor/dolly/object_model.py -text
+dolly_live/_vendor/dolly/object_library.py -text
+dolly_live/_vendor/dolly/console.py -text

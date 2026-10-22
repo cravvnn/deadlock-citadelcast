@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deadlock-live"
+version = "0.2.0.dev0"
+description = "Experimental camera and broadcast tools for live Deadlock production"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE.txt"}
+dependencies = []
+
+[project.scripts]
+deadlock-live = "dolly_live.desk:main"
+
+[tool.setuptools.packages.find]
+include = ["dolly_live*"]

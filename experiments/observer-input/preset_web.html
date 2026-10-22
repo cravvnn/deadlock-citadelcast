@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dolly Live · Camera presets</title>
+<style>
+:root{color-scheme:dark;--bg:#0c131b;--card:#151f2b;--line:#324458;--muted:#adbed0;--ink:#edf4fb;--accent:#9ac9ff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:32px 24px 145px}.eyebrow{font-size:11px;letter-spacing:2.5px;color:var(--accent);font-weight:750}h1{font-size:36px;line-height:1.15;letter-spacing:-1px;margin:10px 0}h2{font-size:19px;margin:0 0 10px}p{color:var(--muted);margin:8px 0}.badge{display:inline-block;font-size:12px;border:1px solid var(--line);padding:5px 10px;border-radius:20px;margin:10px 0}.sim{background:#513e17;color:#ffe0a1}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:20px 0;padding:22px}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.shot{display:block;cursor:pointer;border:1px solid #435970;border-radius:10px;padding:18px;background:#111c28}.shot:has(input:checked){border-color:var(--accent);background:#20374e}.shot b{font-size:17px}.shot p{font-size:13px;margin:8px 0 0}.shot input{margin-right:7px;accent-color:#9ac9ff}.fields{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0}.field{display:flex;flex:1;min-width:140px;flex-direction:column;gap:7px;color:var(--muted);font-size:13px}select{font:600 14px system-ui;color:var(--ink);background:#101b27;border:1px solid #536b85;border-radius:7px;padding:10px;width:100%}button{cursor:pointer;font:650 14px system-ui;padding:12px 17px;border:1px solid #83b1e2;border-radius:8px;background:#294e74;color:#fff}button:disabled{opacity:.4;cursor:default}.primary{background:#b3d7ff;color:#101f30;font-size:16px;min-width:235px}.quiet{background:transparent;border-color:#536b85}.check{display:flex;gap:10px;align-items:flex-start;margin:16px 0}.check input{margin-top:5px;flex-shrink:0;accent-color:#9ac9ff}.small{font-size:12px}.feedback{font-weight:600;color:#b9e8cb;min-height:24px}.error{color:#ffb3aa!important}.events{font:12px/1.6 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:180px;overflow:auto}summary{cursor:pointer;color:var(--muted)}footer{position:fixed;left:0;right:0;bottom:0;display:flex;gap:16px;align-items:center;padding:16px 24px;background:#101d2b;border-top:1px solid #476078}footer strong{flex:1;font-size:13px}.stop{background:#722f39;border-color:#da8791}.note{border-left:2px solid #638bb4;padding-left:12px}a{color:var(--accent)}@media(max-width:600px){main{padding:22px 14px 175px}h1{font-size:29px}.grid{grid-template-columns:1fr}.card{padding:17px}footer{padding:12px;gap:10px}.primary{width:100%}}
+</style></head><body><main>
+<div class="eyebrow">DEADLOCK DOLLY LIVE / PRESET DESK</div>
+<h1>A staged view. One cinematic sweep.</h1>
+<p>Place your observer camera, choose a reveal, then let the preset take the shot.</p>
+<span class="badge" id="mode">Manual starting position · rotation presets</span>
+<section class="card"><h2>1 · Check your observer session</h2>
+<p>Join your private match normally, switch to roaming fly cam, and check that mouse look works.</p>
+<div class="row"><button id="inspect" class="quiet">Inspect current game</button><span class="feedback" id="inspect-status" role="status">Helper status loading…</span></div>
+</section>
+<section class="card"><h2>2 · Set the shot</h2>
+<div class="grid">
+<label class="shot"><b><input name="shot" type="radio" value="lane" checked>Lane panorama</b><p>Start beside or above a lane. An eased horizontal pan carries the view across it.</p></label>
+<label class="shot"><b><input name="shot" type="radio" value="reveal">Walker / lane reveal</b><p>Start high with the horizon in view. Pan while tilting down to reveal the lane below.</p></label>
+</div>
+<div class="fields">
+<label class="field">Duration<select id="duration"><option value="4">4 seconds</option><option value="6" selected>6 seconds</option><option value="8">8 seconds</option></select></label>
+<label class="field">Sweep size<select id="size"><option value="small">Small</option><option value="medium" selected>Medium</option><option value="large">Large</option></select></label>
+<label class="field">Pan direction<select id="direction"><option value="right">Right</option><option value="left">Left</option></select></label>
+</div>
+<label class="check"><input id="invert" type="checkbox"><span>Reverse vertical input <span class="small">— use if the reveal tilts upward.</span></span></label>
+<div class="row"><button id="tilt" class="quiet" disabled>Test a small downward tilt · 2s</button><span class="small">First reveal? Check tilt direction before your take.</span></div>
+<p class="small note">Camera position stays where you place it. These presets do not teleport, travel through the map or track a Walker. Sweep size depends on your sensitivity; keep sensitivity unchanged after rehearsing.</p>
+</section>
+<section class="card"><h2>3 · Stage and run</h2>
+<p>Put the camera at your starting view. Confirm below, press Run, then focus Deadlock during the five-second countdown.</p>
+<label class="check"><input id="confirm" type="checkbox"><span>I am an off-air observer in fly cam, mouse look works, and I have manually staged the starting view for this take.</span></label>
+<button class="primary" id="run" disabled>Run lane panorama</button>
+<p class="small">Close the game console and menus. Release WASD and keep your physical mouse still. A final process check follows the countdown.</p>
+<p class="small">Escape, WASD, a mouse button, or Alt-Tab stops future input. Physical mouse movement alone does not stop the preset. No keys or buttons are held. Stage again for each take; no automatic return.</p>
+</section>
+<details class="card"><summary>Session log and helper controls</summary><div id="events" class="events"></div><p class="small" id="report"></p>
+<p class="small">Ordinary relative mouse input with eased start and finish; 120 requested updates/s. No XYZ or angle readback, game attachment, injection, console transport, recording or game launch. Input logs record Windows insertion, not rendered frames. Current-build live quality requires rehearsal.</p>
+<button id="quit" class="quiet">Close helper</button></details>
+</main><footer><strong id="status" role="status">Helper status loading…</strong><button class="stop" id="stop">Stop preset</button></footer>
+<script>(()=>{'use strict';const token='__CSRF_TOKEN__',$=id=>document.getElementById(id);let state={busy:false,inspected:false,result:'not tested',message:'Helper status loading…',events:[]},pending=false,closed=false,errorText='';
+const shot=()=>document.querySelector('input[name=shot]:checked').value;
+const settings=()=>({shot:shot(),size:$('size').value,duration:Number($('duration').value),direction:$('direction').value,invert_y:$('invert').checked});
+async function post(path,data={}){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-Dolly-Token':token},body:JSON.stringify(data)});const body=await r.json();if(!r.ok)throw new Error(body.error||'Helper action failed');return body;}
+function draw(s){state=s;const busy=s.busy||pending;for(const id of ['inspect','confirm','duration','size','direction','invert'])$(id).disabled=busy;for(const radio of document.querySelectorAll('input[name=shot]'))radio.disabled=busy;for(const id of ['run','tilt'])$(id).disabled=busy||!s.inspected||!$('confirm').checked;$('run').textContent=shot()==='lane'?'Run lane panorama':'Run Walker / lane reveal';const message=errorText||s.message;for(const id of ['status','inspect-status']){$(id).textContent=message;$(id).classList.toggle('error',Boolean(errorText)||s.result==='stopped');}$('events').textContent=s.events.join('\n');$('report').textContent=s.report?'Evidence: '+s.report:'';if(s.simulated){$('mode').textContent='SIMULATED UI CHECK · no OS or game input';$('mode').classList.add('sim');}}
+async function refresh(){if(closed)return;try{const r=await fetch('/state',{cache:'no-store'});if(!r.ok)throw new Error('Helper unavailable');draw(await r.json());}catch(e){errorText='Helper unavailable. Reopen Start Camera Presets.cmd.';draw(state);}}
+async function act(path,data={}){if(pending||state.busy)return;pending=true;errorText='';draw(state);try{await post(path,data);if(path==='/pan')$('confirm').checked=false;}catch(e){errorText=e.message;}finally{pending=false;await refresh();}}
+$('inspect').onclick=()=>act('/inspect');$('confirm').onchange=()=>draw(state);for(const input of document.querySelectorAll('input[name=shot],select,#invert'))input.addEventListener('change',()=>{$('confirm').checked=false;draw(state);});$('run').onclick=()=>act('/pan',{off_air:$('confirm').checked,...settings()});$('tilt').onclick=()=>act('/pan',{off_air:$('confirm').checked,...settings(),shot:'tilt_check'});
+$('stop').onclick=async()=>{errorText='';$('confirm').checked=false;try{await post('/stop');await refresh();}catch(e){errorText=e.message;draw(state);}};$('quit').onclick=async()=>{try{await post('/quit');closed=true;$('status').textContent='Helper closed.';for(const b of document.querySelectorAll('button,input,select'))b.disabled=true;}catch(e){errorText=e.message;draw(state);}};document.addEventListener('keydown',e=>{if(e.key==='Escape')$('stop').click();});refresh();setInterval(refresh,400);
+})();</script></body></html>

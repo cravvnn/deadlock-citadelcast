@@ -1,0 +1,33 @@
+{
+  "repository": "https://github.com/cravvnn/deadlock-dolly",
+  "base_commit": "0be18905f2918329c2f8878ae977f6e52cbf1c25",
+  "license": "MIT; see LICENSE.txt and THIRD_PARTY_NOTICES.md",
+  "note": "Frozen local worktree snapshot; source hashes identify the actual copied bytes.",
+  "files": [
+    {
+      "file": "path.py",
+      "upstream_file": "dolly/path.py",
+      "sha256": "f03ecfabb589773ac198a2bfa5a51d5c4022c8285a2b9137baf6d9aa8e6e37d8"
+    },
+    {
+      "file": "particles.py",
+      "upstream_file": "dolly/particles.py",
+      "sha256": "b79e2962950518c28db75966f8d2f510437018213082b9cbbd209c413aab33b1"
+    },
+    {
+      "file": "object_model.py",
+      "upstream_file": "dolly/object_model.py",
+      "sha256": "bb8794ac5e7a948c21ec5ddadc70cbd951fa92345f3eee1449f5704b3dc51097"
+    },
+    {
+      "file": "object_library.py",
+      "upstream_file": "dolly/object_library.py",
+      "sha256": "195e94d251893472e083e00feed5295be049f1580aeb03519cd0bcca5dd58818"
+    },
+    {
+      "file": "console.py",
+      "upstream_file": "dolly/console.py",
+      "sha256": "e8f03b26bf8641a7c5467a37b6c88bb795aae4606aab6a3072ee02642a957fd8"
+    }
+  ]
+}
