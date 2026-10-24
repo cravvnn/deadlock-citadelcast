@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dolly Live · Camera positions</title>
+<title>CitadelCast · Camera positions</title>
 <style>
 :root{color-scheme:dark;font:16px/1.5 system-ui,sans-serif;background:#11151c;color:#edf1f7}
 *{box-sizing:border-box}body{max-width:1120px;margin:auto;padding:32px 24px 56px}
@@ -19,73 +19,76 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.divider{border-top:1px solid #334257;margin-top:24px;padding-top:20px}.status{min-height:28px;white-space:pre-wrap;color:#c7d6e9;margin-top:16px}.error{color:#ffb6a7}
 #points{display:grid;gap:9px;margin-top:16px}.point{text-align:left;width:100%;overflow-wrap:anywhere}.point strong,.point small{display:block}.point[aria-pressed=true]{border-color:#83d3ba;background:#253f3c}
 .steps{margin:12px 0 0;padding-left:22px;color:#c7d6e9}.steps li{margin:7px 0}footer{margin-top:20px;color:#aab7ca;font-size:13px}
+summary{cursor:pointer;font-weight:600}.manual{margin-top:24px}
 @media(max-width:800px){main{grid-template-columns:1fr}body{padding:20px 14px}header{align-items:flex-start;flex-wrap:wrap}.card{padding:18px}}
 </style>
-<header><div><div class="eyebrow">Deadlock Dolly Live</div><h1>Camera positions</h1><div class="muted">Name the start. Repeat the framing.</div></div><span class="badge" id="mode">Offline authoring</span></header>
+<header><div><div class="eyebrow">Deadlock CitadelCast</div><h1>Camera positions</h1><div class="muted">Choose a saved start, then copy its command.</div></div><span class="badge" id="mode">Position setup</span></header>
 <main>
 <section class="card">
-<h2>Create a starting position</h2>
-<p class="muted">Enter known coordinates, or import one free-camera keyframe from a saved Dolly project.</p>
-<form id="editor">
-<label for="name">Position name</label><input id="name" maxlength="80" required placeholder="Walker / lane / shot name" autocomplete="off">
-<label for="map">Map / game build — your label</label><input id="map" maxlength="80" required placeholder="Use the map and build this point was authored for" autocomplete="off">
-<div class="coords"><div><label for="x">X</label><input id="x" type="number" step="any" required></div><div><label for="y">Y</label><input id="y" type="number" step="any" required></div><div><label for="z">Z</label><input id="z" type="number" step="any" required></div></div>
-<div class="angles"><div><label for="pitch">Pitch (degrees)</label><input id="pitch" type="number" step="any" required></div><div><label for="yaw">Yaw (degrees)</label><input id="yaw" type="number" step="any" required></div></div>
-<div class="row"><button type="submit" class="primary" id="preview">Preview command</button><button type="button" id="save" disabled>Save named position</button></div>
-</form>
-<div class="divider"><h2>Import from Dolly</h2><small>The file stays local. Only the selected pose is sent to this local desk. Imports XYZ, pitch and yaw; lens settings are separate.</small>
-<label for="file">Saved Dolly project JSON (up to 8 MiB)</label><input id="file" type="file" accept=".json,application/json">
-<label for="key">Camera keyframe</label><select id="key" disabled><option>Choose a project first</option></select>
-<div class="row"><button id="import" disabled>Use selected keyframe</button></div></div>
-<div id="status" class="status" role="status" aria-live="polite"></div>
+<h2>Saved positions <span id="count" class="muted">0 / 32</span></h2>
+<small>Choose a position below. Its command appears here automatically.</small><div id="points"></div>
+<div class="divider"><h2>Go to the starting view</h2><small id="source">Choose a saved position, or import a Dolly project.</small>
+<label for="command">Paste this into the game console while in observer freecam</label><textarea id="command" readonly spellcheck="false" placeholder="Choose a position to get its command."></textarea>
+<div class="row"><button id="copy" class="primary" disabled>Copy command</button><button type="button" id="save" disabled>Save this position</button><button id="close">Close position desk</button></div>
+<div id="copyStatus" class="status" role="status" aria-live="polite"></div></div>
+<div class="divider"><h2>Check the starting view</h2><ol class="steps"><li>Use a position authored for the map you are watching.</li><li>Paste the command once in the normal game console.</li><li>Check the camera's location and facing direction.</li></ol><p class="muted">This sets the starting position only. Playback of the full saved shot is separate.</p></div>
 </section>
 <section class="card">
-<h2>Command preview</h2><small id="source">No position selected. Enter all five pose values.</small>
-<label for="command">Single relocation command</label><textarea id="command" readonly spellcheck="false" placeholder="A validated spec_goto command appears here."></textarea>
-<div class="row"><button id="copy" disabled>Copy command</button><button id="close">Close position desk</button></div>
-<div id="copyStatus" class="status" role="status" aria-live="polite"></div>
-<div class="divider"><h2>Saved positions <span id="count" class="muted">0 / 32</span></h2><small>Saved locally. Map labels are operator supplied; every position starts as live-unverified.</small><div id="points"></div></div>
-<div class="divider"><h2>First relocation test</h2><ol class="steps"><li>Check that the saved point matches the current map.</li><li>As an off-air observer in roaming/freecam, paste the one command into the normal game console.</li><li>Check the landing and facing direction, then run your shot from the existing Dolly shots panel.</li></ol><p class="muted">This desk cannot capture the live pose or send commands to the game. Automatic teleport + shot playback awaits a successful live relocation test.</p></div>
+<h2>Add from a Dolly project</h2><small>Choose your saved file. The first camera's position and direction will be filled in for you; lens settings stay separate.</small>
+<label for="file">Saved Dolly project JSON (up to 8 MiB)</label><input id="file" type="file" accept=".json,application/json">
+<label for="key">Camera keyframe</label><select id="key" disabled><option>Choose a project first</option></select>
+<label for="name">Position name</label><input id="name" maxlength="80" required placeholder="Filled from your file name" autocomplete="off">
+<label for="map">Map note (optional)</label><input id="map" maxlength="80" placeholder="Leave blank if you are unsure" autocomplete="off"><small>Just a reminder for you, such as the map name. No game version number is needed.</small>
+<div class="row"><button id="import" class="primary" disabled>Use selected keyframe</button></div>
+<details class="manual"><summary>Enter coordinates manually</summary><p class="muted">For a position you already know. Importing a Dolly file fills these values automatically.</p><form id="editor">
+<div class="coords"><div><label for="x">X position</label><input id="x" type="number" step="any" required></div><div><label for="y">Y position</label><input id="y" type="number" step="any" required></div><div><label for="z">Height (Z)</label><input id="z" type="number" step="any" required></div></div>
+<div class="angles"><div><label for="pitch">Pitch · look up/down</label><input id="pitch" type="number" step="any" required></div><div><label for="yaw">Yaw · turn left/right</label><input id="yaw" type="number" step="any" required></div></div>
+<div class="row"><button type="submit" id="preview">Preview command</button></div>
+</form></details>
+<div id="status" class="status" role="status" aria-live="polite"></div>
 </section>
 </main>
-<footer>No game connection needed for authoring. Existing positions are preserved; save an edited point under a new name.</footer>
+<footer>Files and positions stay local. Save an edited position under a new name. This desk prepares commands for you to paste; it does not control the game.</footer>
 <script>
 const token='__CSRF_TOKEN__';
 const $=id=>document.getElementById(id), fields=['x','y','z','pitch','yaw'];
-let draft=null, origin='manual', project=null, saved=[], selected=null, busy=false, closed=false;
+let draft=null, origin='manual', project=null, saved=[], selected=null, busy=false, closed=false, generatedName='';
 function status(message,error=false){$('status').textContent=message;$('status').classList.toggle('error',error)}
 function controls(){for(const id of ['preview','import','save','copy','close'])$(id).disabled=closed||busy||
   (id==='save'&&!draft)||(id==='copy'&&!$('command').value)||(id==='import'&&!project);
   for(const input of document.querySelectorAll('input'))input.disabled=closed||busy;$('key').disabled=closed||busy||!project}
-function invalidate(){draft=null;selected=null;$('command').value='';$('source').textContent='Preview the edited point before saving.';$('copyStatus').textContent='';controls()}
+function invalidate(){draft=null;selected=null;$('command').value='';$('source').textContent='Preview the edited point before saving.';$('copyStatus').textContent='';render();controls()}
 for(const id of ['name','map',...fields])$(id).addEventListener('input',()=>{if(fields.includes(id))origin='manual';invalidate()});
 async function post(path,data){const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-Dolly-Token':token},body:JSON.stringify(data)});
   const value=await response.json();if(!response.ok)throw Error(value.error||'Local request failed');return value}
 async function action(work){if(busy||closed)return;busy=true;controls();status('');try{await work()}catch(error){status(error.message,true)}finally{busy=false;controls()}}
 function payload(point){return Object.fromEntries(['name','map_label',...fields,'origin'].map(k=>[k,point[k]]))}
-function show(point){$('command').value=point.command;$('source').textContent=point.name+' · '+point.map_label+' · Live unverified';$('copyStatus').textContent='';controls()}
-function manual(){if(!$('editor').reportValidity())return null;return {name:$('name').value,map_label:$('map').value,...Object.fromEntries(fields.map(k=>[k,Number($(k).value)])),origin}}
+function mapNote(){return $('map').value.trim()||'Map not specified'}
+function show(point){$('command').value=point.command;$('source').textContent=point.name+' · '+point.map_label;$('copyStatus').textContent='';controls()}
+function manual(){if(!$('name').reportValidity()||!$('editor').reportValidity())return null;return {name:$('name').value,map_label:mapNote(),...Object.fromEntries(fields.map(k=>[k,Number($(k).value)])),origin}}
 function render(){const container=$('points');container.replaceChildren();$('count').textContent=saved.length+' / 32';
   if(!saved.length){const empty=document.createElement('small');empty.textContent='No saved positions yet.';container.append(empty)}
   for(const point of saved){const button=document.createElement('button');button.className='point';button.type='button';button.setAttribute('aria-pressed',String(selected===point.name));
-    const title=document.createElement('strong'), detail=document.createElement('small');title.textContent=point.name;detail.textContent=point.map_label+' · Live unverified';button.append(title,detail);
-    button.onclick=()=>{if(closed||busy)return;selected=point.name;draft=null;show(point);render()};container.append(button)}}
+    const title=document.createElement('strong'), detail=document.createElement('small');title.textContent=point.name;detail.textContent=point.map_label;button.append(title,detail);
+    button.onclick=()=>{if(closed||busy)return;selected=point.name;draft=null;show(point);render();status('Saved position selected. Copy its command to use it again.')};container.append(button)}}
 async function refresh(){const response=await fetch('/state');if(!response.ok)throw Error('Could not load saved positions');const state=await response.json();saved=state.anchors;
-  $('mode').textContent=state.simulated?'SIMULATED · synthetic test':'Offline authoring';render()}
+  $('mode').textContent=state.simulated?'SIMULATED · synthetic test':'Position setup';
+  if(!selected&&!draft&&saved.length){selected=saved[0].name;show(saved[0])}render()}
 $('editor').onsubmit=event=>{event.preventDefault();const data=manual();if(data)action(async()=>{draft=null;const point=await post('/anchors/preview',data);draft=payload(point);selected=null;show(point);render();status('Preview ready. Save this named point, or copy its command for a manual test.')})};
-$('save').onclick=()=>action(async()=>{const point=await post('/anchors/save',draft);selected=point.name;draft=null;await refresh();show(point);status('Saved locally. Live relocation remains unverified.')});
+$('save').onclick=()=>action(async()=>{const point=await post('/anchors/save',draft);selected=point.name;draft=null;await refresh();show(point);status('Saved locally. You can select this position again next time.')});
 $('key').onchange=invalidate;
 $('file').onchange=()=>action(async()=>{invalidate();project=null;$('key').replaceChildren();$('key').disabled=true;
   const file=$('file').files[0];if(!file)return;if(file.size>8*1024*1024)throw Error('Choose a project no larger than 8 MiB.');
   const raw=JSON.parse((await file.text()).replace(/^\uFEFF/,''));
   if(raw?.format!=='deadlock-dolly'||!Number.isInteger(raw.version)||raw.version<1||raw.version>12||!Array.isArray(raw.keyframes)||!raw.keyframes.length||raw.keyframes.length>100000)throw Error('Choose a Dolly project in reviewed format 1–12, containing camera keys.');
-  project=raw;raw.keyframes.forEach((key,i)=>{const option=document.createElement('option');option.value=i;option.textContent='Key '+(i+1)+(Number.isFinite(key?.time)?' · '+key.time+' s':'')+' · '+(key?.source||'free');$('key').append(option)});$('key').disabled=false;status('Project loaded locally. Name the position, label its map/build, and choose a zero-roll free-camera key.')});
-$('import').onclick=()=>action(async()=>{invalidate();if(!$('name').reportValidity()||!$('map').reportValidity())return;
+  project=raw;if(!$('name').value.trim()||$('name').value===generatedName){generatedName=file.name.replace(/\.json$/i,'').replace(/[\x00-\x1f]/g,'').trim().slice(0,80)||'Imported camera position';$('name').value=generatedName}
+  raw.keyframes.forEach((key,i)=>{const option=document.createElement('option');option.value=i;option.textContent='Key '+(i+1)+(Number.isFinite(key?.time)?' · '+key.time+' s':'')+' · '+(key?.source||'free');$('key').append(option)});$('key').disabled=false;status('Project loaded. Use the selected keyframe to prepare its position command. The map note can stay blank.')});
+$('import').onclick=()=>{if(!$('name').reportValidity())return;return action(async()=>{invalidate();
   const key=project.keyframes[Number($('key').value)], chosen={};if(!key||typeof key!=='object'||Array.isArray(key))throw Error('Choose a valid camera key.');
   for(const field of [...fields,'roll','source','curve_pitch','curve_yaw','curve_roll'])if(Object.hasOwn(key,field))chosen[field]=key[field];
   if(key.attach!==undefined)chosen.attach=key.attach===null?null:true;if(key.source_blend!==undefined)chosen.source_blend=!!key.source_blend;
-  const point=await post('/anchors/import',{format:project.format,version:project.version,key:chosen,name:$('name').value,map_label:$('map').value});
-  for(const field of fields)$(field).value=point[field];origin='dolly-keyframe';draft=payload(point);selected=null;show(point);render();status('Selected key imported for preview. Review the numbers and save the named position.')});
+  const point=await post('/anchors/import',{format:project.format,version:project.version,key:chosen,name:$('name').value,map_label:mapNote()});
+  for(const field of fields)$(field).value=point[field];origin='dolly-keyframe';draft=payload(point);selected=null;show(point);render();status('Starting position ready. Copy its command, or save it for next time.')})};
 $('copy').onclick=async()=>{const box=$('command');try{await navigator.clipboard.writeText(box.value);$('copyStatus').textContent='Copied. Paste into the game console for the manual relocation test.'}catch{box.focus();box.select();$('copyStatus').textContent='Command selected. Press Ctrl+C to copy manually.'}};
 $('close').onclick=()=>action(async()=>{await post('/quit',{});closed=true;for(const element of document.querySelectorAll('input,select,button'))element.disabled=true;status('Position desk closed. Saved positions are retained.')});
 refresh().catch(error=>status(error.message,true));

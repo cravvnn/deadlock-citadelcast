@@ -11,6 +11,7 @@ import threading
 import time
 
 from mouse_trial import Input, KeyboardInput, MouseSession, verify_abi
+from input_build import BUILD
 from normal_console_probe import foreground_pid
 from preset_sweep import SweepEnvironment, xy_packet
 
@@ -209,11 +210,28 @@ def execute_travel(environment, pid, cancel, evidence, selection, latch):
 
 
 class TravelSession(MouseSession):
-    ready_message = "Game found. Stage the view in clear space, then try the three-second Dolly push + pan. Inspection sends no input."
+    ready_message = "Probe passed for the normal client. Push/pan controls are ready after off-air confirmation. No input sent by the probe."
 
     def __init__(self, output, environment=None):
         super().__init__(output, environment or TravelEnvironment())
         self.latch = KeyLatch(self.env, self.cancel)
+
+    def snapshot(self):
+        # Read cached inspection only. Polling the UI never probes or sends input.
+        with self.lock:
+            state = super().snapshot()
+            remaining = (max(0, math.ceil(180 - (time.monotonic() - self.checked[1])))
+                         if self.checked else 0)
+            valid = bool(state["inspected"] and remaining)
+            state["inspected"] = valid
+            state["probe"] = {
+                "status": "ready" if valid else "required",
+                "process": dict(self.checked[0]) if valid else None,
+                "reviewed_build": BUILD if valid and not self.env.simulated else None,
+                "seconds_remaining": remaining if valid else 0,
+                "match_id": None, "camera_pose": None,
+            }
+            return state
 
     def selection(self, mode, data):
         if self.latch.pending():

@@ -1,0 +1,1008 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 var(--font-sans,system-ui);color:var(--foreground,#eff3f9)}h2{font-size:22px;margin:0 0 8px}p{margin:6px 0 14px}.muted{color:var(--muted-foreground,#9aa8b8)}.controls{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:16px 0}select{max-width:100%;padding:8px;border-radius:7px;border:1px solid var(--border,#444);color:inherit;background:var(--card,#17202d)}label{display:flex;gap:8px;align-items:center}input{width:150px;accent-color:var(--primary,#80bfff)}canvas{width:100%;height:360px;display:block}.panel{padding:16px;border:1px solid var(--border,#394253);border-radius:var(--radius,12px);background:var(--card,#17202d)}.readout{padding:12px 0 0;border-top:1px solid var(--border,#394253)}strong{font-size:16px}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;margin-top:12px}.note{font-size:12px}#reason{font-family:var(--font-mono,monospace)}@media(max-width:450px){canvas{height:310px}.controls{gap:10px}}
+</style></head><body><h2>When a cinematic should stay in native chase</h2><p class="muted">Four synthetic obstruction cases. These are saved outputs of the independent proposal model; this page has no game connection.</p>
+<div class="controls"><select id="case" aria-label="Obstruction case"></select><label>Vertical FOV <input id="fov" type="range" min="30" max="110" step="5" value="55"><output id="fovValue"></output></label></div>
+<p id="description"></p><div class="panel"><canvas id="plan" aria-label="Overhead camera and obstruction plan"></canvas><div class="readout"><strong id="outcome"></strong><div id="reason"></div><div class="muted note" id="detail"></div></div></div>
+<div class="legend"><span>● Hero focus</span><span style="color:#5798df">● Initial native camera</span><span style="color:#d28631">○ Desired camera</span><span style="color:#29a68b">● Accepted proposal</span></div>
+<p class="note muted" id="limit"></p><p class="note muted">Top-down fixture geometry only. Three subject sightlines, camera volume and direct travel are checked. A refusal emits no camera pose; the host would retain or request native chase. Native geometry, masks, threading and visual occluder coverage are still unqualified. Nothing here implements live wall avoidance.</p>
+<script>
+const data={
+  "synthetic": true,
+  "game_access": false,
+  "cases": [
+    {
+      "id": "corner",
+      "title": "Blocked entry",
+      "description": "Both endpoints are clear, but the direct camera move crosses the corner.",
+      "focus": [
+        0,
+        0,
+        48
+      ],
+      "initial": [
+        200,
+        0,
+        48
+      ],
+      "desired": [
+        0,
+        200,
+        48
+      ],
+      "boxes": [
+        {
+          "low": [
+            45,
+            45,
+            -20
+          ],
+          "high": [
+            160,
+            160,
+            130
+          ],
+          "name": "corner",
+          "solid": true,
+          "occludes": true
+        }
+      ],
+      "results": [
+        {
+          "fov": 30,
+          "extent": 11.396095898371545,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 35,
+          "extent": 11.889527031290228,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 40,
+          "extent": 12.454551931640067,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 45,
+          "extent": 13.091324945939022,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 50,
+          "extent": 13.800976633995722,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 55,
+          "extent": 14.585789136651977,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 60,
+          "extent": 15.449373047862377,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 65,
+          "extent": 16.396865113591915,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 70,
+          "extent": 17.435168483632268,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 75,
+          "extent": 18.57326061789663,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 80,
+          "extent": 19.82259965949523,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 85,
+          "extent": 21.197669639578756,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 90,
+          "extent": 22.716720333623186,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 95,
+          "extent": 24.402782182976704,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 100,
+          "extent": 26.285075866528683,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 105,
+          "extent": 28.4009993195893,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 110,
+          "extent": 30.79897921443391,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "curtain",
+      "title": "Clear travel, blocked view",
+      "description": "This opaque curtain is non-solid in the fixture. Clearance alone misses it.",
+      "focus": [
+        0,
+        0,
+        48
+      ],
+      "initial": [
+        260,
+        0,
+        48
+      ],
+      "desired": [
+        260,
+        0,
+        48
+      ],
+      "boxes": [
+        {
+          "low": [
+            100,
+            -25,
+            0
+          ],
+          "high": [
+            110,
+            25,
+            100
+          ],
+          "name": "curtain",
+          "solid": false,
+          "occludes": true
+        }
+      ],
+      "results": [
+        {
+          "fov": 30,
+          "extent": 11.396095898371545,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 35,
+          "extent": 11.889527031290228,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 40,
+          "extent": 12.454551931640067,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 45,
+          "extent": 13.091324945939022,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 50,
+          "extent": 13.800976633995722,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 55,
+          "extent": 14.585789136651977,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 60,
+          "extent": 15.449373047862377,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 65,
+          "extent": 16.396865113591915,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 70,
+          "extent": 17.435168483632268,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 75,
+          "extent": 18.57326061789663,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 80,
+          "extent": 19.82259965949523,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 85,
+          "extent": 21.197669639578756,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 90,
+          "extent": 22.716720333623186,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 95,
+          "extent": 24.402782182976704,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 100,
+          "extent": 26.285075866528683,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 105,
+          "extent": 28.4009993195893,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        },
+        {
+          "fov": 110,
+          "extent": 30.79897921443391,
+          "decision": {
+            "action": "return-native",
+            "reason": "hero sightline blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "wall",
+      "title": "Wall contraction",
+      "description": "The camera stays on the hero side. A wider lens needs more room.",
+      "focus": [
+        0,
+        0,
+        48
+      ],
+      "initial": [
+        100,
+        0,
+        48
+      ],
+      "desired": [
+        260,
+        0,
+        48
+      ],
+      "boxes": [
+        {
+          "low": [
+            160,
+            -100,
+            -50
+          ],
+          "high": [
+            180,
+            100,
+            180
+          ],
+          "name": "wall",
+          "solid": true,
+          "occludes": true
+        }
+      ],
+      "results": [
+        {
+          "fov": 30,
+          "extent": 11.396095898371545,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              146.60390410162844,
+              0.0,
+              48.0
+            ],
+            "distance": 146.60390410162844,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 35,
+          "extent": 11.889527031290228,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              146.11047296870976,
+              0.0,
+              48.0
+            ],
+            "distance": 146.11047296870976,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 40,
+          "extent": 12.454551931640067,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              145.54544806835995,
+              0.0,
+              48.0
+            ],
+            "distance": 145.54544806835995,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 45,
+          "extent": 13.091324945939022,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              144.90867505406098,
+              0.0,
+              48.0
+            ],
+            "distance": 144.90867505406098,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 50,
+          "extent": 13.800976633995722,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              144.19902336600427,
+              0.0,
+              48.0
+            ],
+            "distance": 144.19902336600427,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 55,
+          "extent": 14.585789136651977,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              143.41421086334802,
+              0.0,
+              48.0
+            ],
+            "distance": 143.41421086334802,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 60,
+          "extent": 15.449373047862377,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              142.55062695213763,
+              0.0,
+              48.0
+            ],
+            "distance": 142.55062695213763,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 65,
+          "extent": 16.396865113591915,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              141.6031348864081,
+              0.0,
+              48.0
+            ],
+            "distance": 141.6031348864081,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 70,
+          "extent": 17.435168483632268,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              140.56483151636775,
+              0.0,
+              48.0
+            ],
+            "distance": 140.56483151636775,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 75,
+          "extent": 18.57326061789663,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              139.42673938210336,
+              0.0,
+              48.0
+            ],
+            "distance": 139.42673938210336,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 80,
+          "extent": 19.82259965949523,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              138.17740034050476,
+              0.0,
+              48.0
+            ],
+            "distance": 138.17740034050476,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 85,
+          "extent": 21.197669639578756,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              136.80233036042125,
+              0.0,
+              48.0
+            ],
+            "distance": 136.80233036042125,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 90,
+          "extent": 22.716720333623186,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              135.2832796663768,
+              0.0,
+              48.0
+            ],
+            "distance": 135.2832796663768,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 95,
+          "extent": 24.402782182976704,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              133.5972178170233,
+              0.0,
+              48.0
+            ],
+            "distance": 133.5972178170233,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 100,
+          "extent": 26.285075866528683,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              131.71492413347133,
+              0.0,
+              48.0
+            ],
+            "distance": 131.71492413347133,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 105,
+          "extent": 28.4009993195893,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              129.5990006804107,
+              0.0,
+              48.0
+            ],
+            "distance": 129.5990006804107,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 110,
+          "extent": 30.79897921443391,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "contracted",
+            "camera": [
+              127.2010207855661,
+              0.0,
+              48.0
+            ],
+            "distance": 127.2010207855661,
+            "queries": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "proxy",
+      "title": "Conservative proxy limitation",
+      "description": "The wall is behind the eye. The enclosing cube can reject a clear body and near plane.",
+      "focus": [
+        0,
+        0,
+        48
+      ],
+      "initial": [
+        260,
+        0,
+        48
+      ],
+      "desired": [
+        260,
+        0,
+        48
+      ],
+      "boxes": [
+        {
+          "low": [
+            272,
+            -300,
+            -200
+          ],
+          "high": [
+            274,
+            300,
+            300
+          ],
+          "name": "rear wall",
+          "solid": true,
+          "occludes": true
+        }
+      ],
+      "results": [
+        {
+          "fov": 30,
+          "extent": 11.396095898371545,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "clear",
+            "camera": [
+              260.0,
+              0.0,
+              48.0
+            ],
+            "distance": 260.0,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 35,
+          "extent": 11.889527031290228,
+          "decision": {
+            "action": "publish-proposal",
+            "reason": "clear",
+            "camera": [
+              260.0,
+              0.0,
+              48.0
+            ],
+            "distance": 260.0,
+            "queries": 6
+          }
+        },
+        {
+          "fov": 40,
+          "extent": 12.454551931640067,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 45,
+          "extent": 13.091324945939022,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 50,
+          "extent": 13.800976633995722,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 55,
+          "extent": 14.585789136651977,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 60,
+          "extent": 15.449373047862377,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 65,
+          "extent": 16.396865113591915,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 70,
+          "extent": 17.435168483632268,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 75,
+          "extent": 18.57326061789663,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 80,
+          "extent": 19.82259965949523,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 85,
+          "extent": 21.197669639578756,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 90,
+          "extent": 22.716720333623186,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 95,
+          "extent": 24.402782182976704,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 100,
+          "extent": 26.285075866528683,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 105,
+          "extent": 28.4009993195893,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        },
+        {
+          "fov": 110,
+          "extent": 30.79897921443391,
+          "decision": {
+            "action": "return-native",
+            "reason": "camera travel blocked",
+            "camera": null,
+            "distance": null,
+            "queries": 3
+          }
+        }
+      ]
+    }
+  ]
+}
+,$=id=>document.getElementById(id);data.cases.forEach((c,i)=>{const o=document.createElement('option');o.value=i;o.textContent=c.title;$('case').append(o)});
+function draw(){const c=data.cases[+$('case').value],r=c.results.find(v=>v.fov===+$('fov').value),d=r.decision,el=$('plan'),rect=el.getBoundingClientRect(),ratio=devicePixelRatio||1;el.width=rect.width*ratio;el.height=rect.height*ratio;const g=el.getContext('2d');g.scale(ratio,ratio);const w=rect.width,h=rect.height,close=c.id==='proxy',scale=close?Math.min((w-40)/100,(h-55)/120):Math.min((w-40)/420,(h-30)/460),ox=close?(w-100*scale)/2-210*scale:(w-420*scale)/2+50*scale,oy=h/2+(close?10:25*scale),P=p=>[ox+p[0]*scale,oy-p[1]*scale],ink=getComputedStyle(document.body).color;g.clearRect(0,0,w,h);
+const line=(a,b,color,dash=[])=>{g.strokeStyle=color;g.setLineDash(dash);g.beginPath();g.moveTo(...P(a));g.lineTo(...P(b));g.stroke();g.setLineDash([])};const box=(lo,hi,color,fill=true)=>{const a=P([lo[0],hi[1]]),b=P([hi[0],lo[1]]);g.strokeStyle=color;g.fillStyle=color+'28';if(fill)g.fillRect(...a,b[0]-a[0],b[1]-a[1]);g.strokeRect(...a,b[0]-a[0],b[1]-a[1])};
+g.lineWidth=1;for(let x=close?210:0;x<=(close?310:350);x+=close?10:50)line([x,close?-60:-210],[x,close?60:230],'#7e91a52a');for(let y=close?-60:-200;y<=(close?60:200);y+=close?10:50)line([close?210:-40,y],[close?310:360,y],'#7e91a52a');c.boxes.forEach(b=>{box(b.low,b.high,b.solid?'#bd6e6e':'#9a77ce');const p=P([b.low[0],Math.min(close?50:190,b.high[1])]);g.fillStyle=ink;g.font='11px system-ui';g.fillText(b.name,p[0]+5,p[1]+15)});
+line(c.focus,c.desired,'#d28631',[5,5]);line(c.initial,c.desired,'#d06a6a',[3,4]);if(d.camera){line(c.focus,d.camera,'#29a68b');line(c.initial,d.camera,'#29a68b')}
+const camera=c.id==='proxy'?c.desired:d.camera||c.desired;g.setLineDash([4,4]);box([camera[0]-r.extent,camera[1]-r.extent],[camera[0]+r.extent,camera[1]+r.extent],'#b67c7c',false);g.setLineDash([]);
+if(c.id==='proxy'){box([camera[0]-8,camera[1]-8],[camera[0]+8,camera[1]+8],'#5798df',false);const half=10*Math.tan(r.fov*Math.PI/360)*16/9;g.lineWidth=3;line([camera[0]-10,-half],[camera[0]-10,half],'#29a68b');g.lineWidth=1}
+function dot(p,color,open=false,size=5){g.beginPath();g.arc(...P(p),size,0,Math.PI*2);g.strokeStyle=color;g.fillStyle=color;open?g.stroke():g.fill()}
+dot(c.focus,ink);dot(c.initial,'#5798df');dot(c.desired,'#d28631',true,9);if(d.camera)dot(d.camera,'#29a68b');g.fillStyle=ink;g.font='11px system-ui';close?g.fillText('Camera close-up ? hero is to the left',16,18):g.fillText('Hero',P(c.focus)[0]-13,P(c.focus)[1]+20);
+$('description').textContent=c.description;$('fovValue').textContent=r.fov+'°';$('outcome').textContent=d.action==='publish-proposal'?'Proposal accepted in this fixture':'No cinematic pose emitted';$('reason').textContent=d.reason;$('detail').textContent=d.queries+' queries in final sample · camera envelope half-width '+r.extent.toFixed(1)+' fixture units'+(d.distance!==null?' · distance '+d.distance.toFixed(1):'');
+$('limit').textContent=c.id==='proxy'?'The thin green segment is the actual near plane in this fixture; the blue square is the 8-unit body proxy. Both are clear of the rear wall. The larger dashed envelope is conservative and can refuse unnecessarily. Of 20 independently checked rear-wall variants, 10 were refused. This is not a native geometry measurement.':c.id==='wall'?'This output follows 6 seconds of stationary recovery from the initial camera. Only the final sample is shown. Changing the lens re-evaluates a separate fixture run; it does not zoom a live camera.':c.id==='corner'?'A clean destination does not justify moving through the intervening wall. This model does not invent an alternate route or teleport.':'Physical collision and visible obstruction need separate treatment: this curtain blocks the image even though the fixture allows travel through it.';
+}
+$('case').onchange=draw;$('fov').oninput=draw;window.addEventListener('resize',draw);draw();console.log(JSON.stringify({cases:data.cases.length,variants:data.cases.reduce((n,c)=>n+c.results.length,0),synthetic:data.synthetic,gameAccess:data.game_access}));
+</script></body></html>

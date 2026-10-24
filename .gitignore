@@ -27,3 +27,4 @@ HANDOFF*.md
 .DS_Store
 Thumbs.db
 Desktop.ini
+/exceptions.txt

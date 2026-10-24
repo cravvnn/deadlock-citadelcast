@@ -1,0 +1,33 @@
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/citadel_base_styles.vcss" />
+        <include src="file://{resources}/styles/citadelcast/hero_recap.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/citadelcast/hero_recap.js" />
+    </scripts>
+    <Panel class="CitadelCastRecap" hittest="false" hittestchildren="false">
+        <Panel id="RecapCard" class="RecapCard">
+            <Panel class="Heading">
+                <Label id="RecapPlayer" class="PlayerName" text="" html="false" />
+                <Label id="RecapWindow" class="WindowLabel" text="" html="false" />
+            </Panel>
+            <Panel class="Metrics">
+                <Panel class="Metric">
+                    <Image class="MetricIcon" src="s2r://panorama/images/post_game/attributes/icon_kill.vsvg" />
+                    <Label id="RecapKills" class="MetricValue" text="" />
+                    <Label class="MetricLabel" text="KILLS" />
+                </Panel>
+                <Panel class="Metric">
+                    <Label id="RecapAssists" class="MetricValue" text="" />
+                    <Label class="MetricLabel" text="ASSISTS" />
+                </Panel>
+                <Panel class="Metric Souls">
+                    <Image class="MetricIcon" src="s2r://panorama/images/hud/icons/icon_souls.vsvg" />
+                    <Label id="RecapSouls" class="MetricValue" text="" />
+                    <Label class="MetricLabel" text="SOULS EARNED" />
+                </Panel>
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

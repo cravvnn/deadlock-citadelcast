@@ -236,6 +236,30 @@ class TravelSessionTests(unittest.TestCase):
         self.assertIsNone(report["observed_camera_response"])
         self.assertEqual(report["release_pending"], [])
 
+    def test_probe_snapshot_expires_without_input_and_stop_clears_identity(self):
+        self.assertEqual(self.session.snapshot()["probe"]["status"], "required")
+        state = self.action("inspect")
+        probe = state["probe"]
+        self.assertTrue(state["inspected"])
+        self.assertEqual(probe["process"], self.env.identity())
+        self.assertIsNone(probe["reviewed_build"])  # Fixtures cannot certify a build.
+        self.assertIsNone(probe["match_id"])
+        self.assertIsNone(probe["camera_pose"])
+        self.assertGreater(probe["seconds_remaining"], 0)
+        probe["process"]["pid"] = 999  # Browser data cannot alter the cached identity.
+        self.assertEqual(self.session.snapshot()["probe"]["process"], self.env.identity())
+        with patch.object(travel_trial.time, "monotonic", return_value=self.session.checked[1] + 181):
+            expired = self.session.snapshot()
+            self.assertFalse(expired["inspected"])
+            self.assertIsNone(expired["probe"]["process"])
+            with self.assertRaises(ValueError):
+                self.session.start("pan", {"off_air": True})
+        self.assertEqual(self.env.key_events, [])
+        self.assertEqual(self.env.moves, [])
+        self.action("inspect")
+        self.session.stop()
+        self.assertIsNone(self.session.snapshot()["probe"]["process"])
+
     def test_release_failure_retains_ownership_blocks_rearm_and_stop_recovers(self):
         self.action("inspect")
         self.env.reject_up.add("ctrl")

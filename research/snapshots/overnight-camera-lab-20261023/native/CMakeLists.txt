@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(CitadelCastOfflineCameraStudy LANGUAGES CXX)
+add_executable(hero_ab_sim hero_ab_sim.cpp)
+target_compile_features(hero_ab_sim PRIVATE cxx_std_17)
+target_include_directories(hero_ab_sim PRIVATE "${CMAKE_CURRENT_LIST_DIR}/../../hero-framing-ab-6819-20261023/source")

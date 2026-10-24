@@ -5,3 +5,5 @@ dolly_live/_vendor/dolly/particles.py -text
 dolly_live/_vendor/dolly/object_model.py -text
 dolly_live/_vendor/dolly/object_library.py -text
 dolly_live/_vendor/dolly/console.py -text
+# Reviewed research snapshots retain their original source/fixture hashes.
+research/snapshots/** -text whitespace=cr-at-eol

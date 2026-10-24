@@ -1,0 +1,18 @@
+/* Namespaced additive child; no native HUD selectors overridden. */
+.CitadelCastRecap { width: 100%; height: 100%; opacity: 0; transition-property: opacity; transition-duration: 0.20s; }
+.CitadelCastRecap.Visible { opacity: 1; }
+.CitadelCastRecap .RecapCard { width: 460px; flow-children: down; horizontal-align: right; vertical-align: center; margin-right: 100px; margin-bottom: 180px; padding: 16px 20px; background-color: offBlack&ed; border-top: 3px solid team1ColorBright; transform: translateY(8px); transition-property: transform; transition-duration: 0.25s; }
+.CitadelCastRecap.Visible .RecapCard { transform: translateY(0px); }
+.CitadelCastRecap.Sapphire .RecapCard { border-top-color: team2ColorBright; }
+.CitadelCastRecap.HeadAnchor .RecapCard { horizontal-align: left; vertical-align: top; margin: 0px; }
+.CitadelCastRecap .Heading { width: 100%; flow-children: down; margin-bottom: 12px; }
+.CitadelCastRecap .PlayerName { color: offWhite; font-family: block; font-size: 28px; max-width: 410px; text-overflow: shrink; }
+.CitadelCastRecap .WindowLabel { color: offWhite&99; font-family: sans; font-size: 15px; }
+.CitadelCastRecap .Metrics { flow-children: right; }
+.CitadelCastRecap .Metric { flow-children: down; width: 100px; margin-right: 12px; }
+.CitadelCastRecap .Metric.Souls { width: 174px; margin-right: 0px; }
+.CitadelCastRecap .MetricIcon { width: 20px; height: 20px; wash-color: offWhite; margin-bottom: 4px; }
+.CitadelCastRecap .Souls .MetricIcon { wash-color: soulColor; }
+.CitadelCastRecap .MetricValue { color: offWhite; font-family: sans; font-size: 28px; font-weight: bold; }
+.CitadelCastRecap .Souls .MetricValue { color: soulColor; }
+.CitadelCastRecap .MetricLabel { color: offWhite&99; font-family: sans; font-size: 13px; }

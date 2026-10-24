@@ -1,0 +1,338 @@
+[
+  {
+    "id": "walker-reveal",
+    "title": "Walker reveal",
+    "family": "Walkers",
+    "duration": 7,
+    "shape": "arc",
+    "cue": "Before a lane story or during a lull",
+    "picture": "Low three-quarter approach into a broad side reveal; bank peaks gently and resolves level.",
+    "requires": [
+      "Current-map Walker anchor and clear corridor",
+      "New authored Dolly keys"
+    ],
+    "radius": 700,
+    "height": 160,
+    "start": -60,
+    "end": 25,
+    "bank": 4,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "walker-defense",
+    "title": "Walker defense wide",
+    "family": "Walkers",
+    "duration": 6,
+    "shape": "crane",
+    "cue": "Defending team gathers before a push",
+    "picture": "Rise enough to include both approach lanes, then hold the readable wide.",
+    "requires": [
+      "Per-Walker overview anchor",
+      "Roof and foliage clearance"
+    ],
+    "radius": 760,
+    "height": 330,
+    "start": -30,
+    "end": -20,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "walker-after",
+    "title": "Walker aftermath",
+    "family": "Walkers",
+    "duration": 5,
+    "shape": "pullback",
+    "cue": "After objective destruction, once action settles",
+    "picture": "Start on the objective area and pull back to reveal the team and lane context.",
+    "requires": [
+      "Operator timing; destruction event not bound",
+      "Anchor remains usable after objective changes"
+    ],
+    "radius": 450,
+    "height": 160,
+    "start": 20,
+    "end": 35,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "opening-lane",
+    "title": "Opening lane rollout",
+    "family": "Match opening",
+    "duration": 8,
+    "shape": "rail",
+    "cue": "Viewer already receives the opening; operator cues on departure",
+    "picture": "Travel above one lane toward its first contest, with a level horizon and stable direction.",
+    "requires": [
+      "Received opening footage; no live rewind assumed",
+      "Manually surveyed lane path"
+    ],
+    "radius": 750,
+    "height": 260,
+    "start": -30,
+    "end": 25,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "opening-escort",
+    "title": "Team departure escort",
+    "family": "Match opening",
+    "duration": 6,
+    "shape": "hero-side",
+    "cue": "Select a departing hero before movement begins",
+    "picture": "Parallel elevated side view provides travel direction and team context.",
+    "requires": [
+      "Target lifetime and zipline/dash behavior",
+      "Clearance for a moving rig"
+    ],
+    "radius": 350,
+    "height": 110,
+    "start": 90,
+    "end": 90,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "opening-reveal",
+    "title": "Base-to-city reveal",
+    "family": "Match opening",
+    "duration": 6,
+    "shape": "crane",
+    "cue": "Pre-match or an opening buffer segment",
+    "picture": "Slow lift from team staging into the city skyline; end on a stable overview.",
+    "requires": [
+      "Base anchor and sky/roof clearance",
+      "Native map-relative path authoring"
+    ],
+    "radius": 850,
+    "height": 360,
+    "start": -50,
+    "end": -10,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "midboss-establish",
+    "title": "Midboss arena reveal",
+    "family": "Midboss",
+    "duration": 6,
+    "shape": "arc",
+    "cue": "Before teams commit to the objective",
+    "picture": "A short perimeter arc explains the pit and entrances; stop before the contested moment.",
+    "requires": [
+      "Current arena geometry and ceiling",
+      "Arena anchor; no entity tracking required"
+    ],
+    "radius": 650,
+    "height": 300,
+    "start": -55,
+    "end": 15,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "midboss-fight",
+    "title": "Midboss fight master",
+    "family": "Midboss",
+    "duration": 8,
+    "shape": "locked",
+    "cue": "Combat begins in the objective area",
+    "picture": "Hold a high three-quarter view of the arena and entrances; prioritize readable action.",
+    "requires": [
+      "Surveyed wide bookmark",
+      "Visible arena and entrances; no participant list assumed"
+    ],
+    "radius": 780,
+    "height": 450,
+    "start": 25,
+    "end": 25,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "midboss-entrance",
+    "title": "Entrance watch",
+    "family": "Midboss",
+    "duration": 5,
+    "shape": "rail",
+    "cue": "Producer expects a contest from one entrance",
+    "picture": "Short lateral move ends in a stable angle linking the entrance and objective.",
+    "requires": [
+      "Operator-selected entrance",
+      "No hidden information or prediction of arrivals"
+    ],
+    "radius": 620,
+    "height": 240,
+    "start": 10,
+    "end": 35,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "midboss-after",
+    "title": "Objective aftermath",
+    "family": "Midboss",
+    "duration": 4,
+    "shape": "pullback",
+    "cue": "After the decisive event is already visible",
+    "picture": "Pull back for team context, then hand off to the selected player's native view.",
+    "requires": [
+      "Manual cue first",
+      "No automatic steal/reward detection yet"
+    ],
+    "radius": 500,
+    "height": 230,
+    "start": 35,
+    "end": 40,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "hero-turn",
+    "title": "Hero three-quarter: turn",
+    "family": "Players",
+    "duration": 6,
+    "shape": "hero-follow",
+    "cue": "Select the hero after a standout play",
+    "picture": "Follow hero facing with a restrained three-quarter front/side angle, keeping the hero centered.",
+    "requires": [
+      "Based on accepted motion and tested A profile",
+      "Shorter timing and clearance remain new"
+    ],
+    "radius": 260,
+    "height": 84,
+    "start": 45,
+    "end": 45,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "hero-hold",
+    "title": "Hero three-quarter: hold",
+    "family": "Players",
+    "duration": 6,
+    "shape": "hero-hold",
+    "cue": "Use when a stable background matters",
+    "picture": "Hold the starting world bearing while tracking position; hero may turn side-on or away.",
+    "requires": [
+      "Based on tested B profile",
+      "Clearance and chosen duration remain new"
+    ],
+    "radius": 260,
+    "height": 84,
+    "start": 45,
+    "end": 45,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "hero-parallel",
+    "title": "Lateral action profile",
+    "family": "Players",
+    "duration": 5,
+    "shape": "hero-side",
+    "cue": "Open-lane run or dash; action remains readable",
+    "picture": "A side view lets a moving hero travel through the scene without an orbit chasing every turn.",
+    "requires": [
+      "Moving-target corridor",
+      "Dash discontinuity and framing tests"
+    ],
+    "radius": 320,
+    "height": 96,
+    "start": 90,
+    "end": 90,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "hero-victory",
+    "title": "Post-play portrait",
+    "family": "Players",
+    "duration": 3.5,
+    "shape": "hero-push",
+    "cue": "After a big play, once the hero is out of immediate danger",
+    "picture": "Brief front/side push-in with enough room for the weapon and hands, then native chase.",
+    "requires": [
+      "Clearance and hero-specific framing",
+      "Manual producer decision; no kill automation"
+    ],
+    "radius": 300,
+    "height": 84,
+    "start": 45,
+    "end": 45,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "billy-reload",
+    "title": "Billy reload insert",
+    "family": "Players",
+    "duration": 2.5,
+    "shape": "reload",
+    "cue": "Operator sees reload begin and elects to feature it",
+    "picture": "Hold weapon-side three-quarter framing; let the hand animation cross the frame naturally.",
+    "requires": [
+      "Actual Billy recording with reload/entry/exit timestamps",
+      "No reload trigger or phase has been measured"
+    ],
+    "radius": 230,
+    "height": 76,
+    "start": 55,
+    "end": 55,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  },
+  {
+    "id": "hero-exit",
+    "title": "Hero-to-context exit",
+    "family": "Players",
+    "duration": 5,
+    "shape": "hero-pullback",
+    "cue": "After a player insert, reveal where the next action is",
+    "picture": "Ease wider and higher while keeping the hero anchored, then cut to a tactical overview.",
+    "requires": [
+      "Moving-target clearance",
+      "Separate overview bookmark; no automatic feed switch"
+    ],
+    "radius": 270,
+    "height": 120,
+    "start": 45,
+    "end": 55,
+    "bank": 0,
+    "status": "synthetic concept; not a game-ready path",
+    "coordinate_space": "illustrative local anchor",
+    "fallback": "Operator cuts to native chase or an already-qualified wide; no automatic target selection."
+  }
+]
